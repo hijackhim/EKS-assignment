@@ -1,0 +1,20 @@
+SSH Access Explanation (Private EKS Worker Nodes)
+1. Worker Nodes Are Private
+
+•	All EKS worker nodes are deployed in private subnets without public IP addresses.
+•	No inbound SSH (port 22) is allowed from the internet.
+•	This ensures the worker nodes are not directly exposed to external networks.
+
+2. Secure Access via AWS Systems Manager (SSM)
+
+•	Administrative access is provided through AWS SSM Session Manager instead of SSH.
+•	A dedicated bastion EC2 instance is deployed in a private subnet with the AmazonSSMManagedInstanceCore IAM policy attached.
+•	Access is controlled using IAM authentication rather than SSH keys.
+
+3. No Direct Internet SSH Access
+There are:
+•	No public IP addresses on worker nodes
+•	No inbound security group rules allowing port 22
+•	No direct SSH access from the internet
+•	All access is performed securely through AWS SSM, following AWS best practices for private infrastructure access.
+
