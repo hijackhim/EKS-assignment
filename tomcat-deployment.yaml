@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tomcat
+  template:
+    metadata:
+      labels:
+        app: tomcat
+    spec:
+      containers:
+      - name: tomcat
+        image: tomcat:9.0
+        ports:
+        - containerPort: 8080
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            cp -r /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/ && \catalina.sh run
